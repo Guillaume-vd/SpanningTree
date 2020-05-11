@@ -1,6 +1,6 @@
 package Algo;
 
-import Autre.ComparePoid;
+import Autre.ComparePoidsDecroissant;
 import Autre.FormeCycle;
 import Type.Arc;
 import Type.Graphe;
@@ -19,16 +19,17 @@ public class Kruskal2 {
         this.ListeArcsAjouter = new ArrayList<>();
         List<Arc> ListeArc = graphe.getArc();
         Arc ArcAjout;
-
-        Collections.sort(ListeArc, new ComparePoid());
-        Collections.reverse(ListeArc);
+        int i;
+        
+        Collections.sort(ListeArc, new ComparePoidsDecroissant());
         this.ListeArcsAjouter.add(ListeArc.remove(0));
-        while (ListeArc.size() > 0){
-            ArcAjout = ListeArc.remove(0);
+        for(i = 0; i  < ListeArc.size(); i++) {
+        	ArcAjout = ListeArc.get(i);
             if(!FormeCycle.FC(this.ListeArcsAjouter, ArcAjout)) {
-                this.ListeArcsAjouter.add(ArcAjout);
+            	this.ListeArcsAjouter.add(ArcAjout);
                 this.nbArc++;
-                this.Poidtotal += ArcAjout.getPoid();
+                //this.Poidtotal += ArcAjout.getPoid();
+                this.Poidtotal += ArcAjout.getValeur();
             }
         }
     }
@@ -41,5 +42,7 @@ public class Kruskal2 {
         return this.nbArc;
     }
 
-    public int getPoidtotal(){return this.Poidtotal; }
+    public int getPoidtotal(){
+    	return this.Poidtotal;
+    }
 }

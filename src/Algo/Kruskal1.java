@@ -16,11 +16,11 @@ public class Kruskal1 {
         this.ListeArcsAjouter = new ArrayList<>();
         List<Arc> ListeArc = graphe.getArc();
         Arc ArcAjout;
-        
+        int i;
         Collections.sort(ListeArc, new ComparePoids());
-        this.ListeArcsAjouter.add(ListeArc.remove(0));
-        while (ListeArc.size() > 0){
-            ArcAjout = ListeArc.remove(0);
+        this.ListeArcsAjouter.add(ListeArc.get(0));
+        for(i = 0; i  < ListeArc.size(); i++) {
+        	ArcAjout = ListeArc.get(i);
             if(!FormeCycle.FC(this.ListeArcsAjouter, ArcAjout)) {
             	this.ListeArcsAjouter.add(ArcAjout);
             }
