@@ -61,5 +61,47 @@ public class Graphe {
     public void ajoutArc(Arc a) {
         this.arcs.add(a);
     }
-
+    
+    public boolean estConnexe(Arc c) {
+    	c.getOrigine().enleverVoisin(c.getArrivee());
+    	c.getArrivee().enleverVoisin(c.getOrigine());
+    	List<Sommet> s = this.getSommetsClone();
+    	List<Sommet> res = parcour(new ArrayList<Sommet>(), c.getOrigine());
+    	boolean fini = false;
+    	while(!fini || !s.isEmpty()) {
+    		if(!res.contains(s.remove(0))) {
+    			fini = true;
+    		}
+    	}
+    	if(fini) {
+    		c.getOrigine().ajouterVoisin(c.getArrivee());
+    		c.getArrivee().ajouterVoisin(c.getOrigine());
+    	}
+    	return !fini;
+    }
+    
+    public List<Sommet> parcour(List<Sommet> l, Sommet s){
+    	List<Sommet> voisins = s.getVoisins();
+    	List<Sommet> res;
+    	int i = 0;
+    	l.add(s);
+    	while(i < voisins.size()) {
+    		if(l.contains(voisins.get(i))) {
+    			voisins.remove(i);
+    		}
+    		else {
+    			res = parcour(l, voisins.get(i));
+    			while(!res.isEmpty()) {
+    				if(l.contains(res.get(0))) {
+    					res.remove(0);
+    				}
+    				else {
+    					l.add(res.remove(0));
+    				}
+    			}
+    			i++;
+    		}
+    	}
+    	return l;
+    }
 }

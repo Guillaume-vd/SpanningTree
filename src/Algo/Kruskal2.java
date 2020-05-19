@@ -1,7 +1,6 @@
 package Algo;
 
 import Autre.ComparePoidsDecroissant;
-import Autre.FormeCycle;
 import Type.Arc;
 import Type.Graphe;
 
@@ -10,39 +9,38 @@ import java.util.Collections;
 import java.util.List;
 
 public class Kruskal2 {
-    private List<Arc> ListeArcsAjouter;
-    private int nbArc = 0;
-    private int Poidtotal = 0;
+    private List<Arc> listeArcs;
+    private int poidsTotal;
 
 
     public Kruskal2(Graphe graphe){
-        this.ListeArcsAjouter = new ArrayList<>();
-        List<Arc> ListeArc = graphe.getArc();
-        Arc ArcAjout;
-        int i;
-        
-        Collections.sort(ListeArc, new ComparePoidsDecroissant());
-        this.ListeArcsAjouter.add(ListeArc.remove(0));
-        for(i = 0; i  < ListeArc.size(); i++) {
-        	ArcAjout = ListeArc.get(i);
-            if(!FormeCycle.FC(this.ListeArcsAjouter, ArcAjout)) {
-            	this.ListeArcsAjouter.add(ArcAjout);
-                this.nbArc++;
-                //this.Poidtotal += ArcAjout.getPoid();
-                this.Poidtotal += ArcAjout.getValeur();
+    	this.poidsTotal = 0;
+    	this.listeArcs = new ArrayList<Arc>(graphe.getArc());
+        Arc arc;
+        int i = 0;
+        Collections.sort(listeArcs, new ComparePoidsDecroissant());
+        while(i < listeArcs.size()) {
+        	arc = listeArcs.get(i);
+            if(graphe.estConnexe(arc)) {
+            	listeArcs.remove(arc);
+                
+            }
+            else {
+            	this.poidsTotal += arc.getValeur();
+            	i++;
             }
         }
     }
 
-    public List<Arc> getListeArcsAjouter(){
-        return this.ListeArcsAjouter;
-    }
-
     public int getNbArc(){
-        return this.nbArc;
+        return this.getArcs().size();
+    }
+    
+    public List<Arc> getArcs(){
+    	return this.listeArcs;
     }
 
-    public int getPoidtotal(){
-    	return this.Poidtotal;
+    public int getPoidsTotal(){
+    	return this.poidsTotal;
     }
 }

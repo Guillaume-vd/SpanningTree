@@ -10,25 +10,34 @@ import java.util.Collections;
 import java.util.List;
 
 public class Kruskal1 {
-	private List<Arc> ListeArcsAjouter;
+	private List<Arc> listeArcs;
+    private int poidsTotal;
 
     public Kruskal1(Graphe graphe){
-        this.ListeArcsAjouter = new ArrayList<>();
+        this.listeArcs = new ArrayList<>();
         List<Arc> ListeArc = graphe.getArc();
         Arc ArcAjout;
         int i;
         Collections.sort(ListeArc, new ComparePoids());
-        this.ListeArcsAjouter.add(ListeArc.get(0));
-        for(i = 0; i  < ListeArc.size(); i++) {
+        this.listeArcs.add(ListeArc.get(0));
+        for(i = 1; i  < ListeArc.size(); i++) { // ListeArc.size() / ListeArc.size() - 1 / ListeArc.size() -2???
         	ArcAjout = ListeArc.get(i);
-            if(!FormeCycle.FC(this.ListeArcsAjouter, ArcAjout)) {
-            	this.ListeArcsAjouter.add(ArcAjout);
+            if(!FormeCycle.FC(this.listeArcs, ArcAjout)) {
+            	this.listeArcs.add(ArcAjout);
+            	this.poidsTotal += ArcAjout.getValeur();
             }
         }
     }
     
-    public List<Arc> getListeArcsAjouter(){
-    	return this.ListeArcsAjouter;
+    public int getNbArc(){
+        return this.getArcs().size();
+    }
+    
+    public List<Arc> getArcs(){
+    	return this.listeArcs;
     }
 
+    public int getPoidtotal(){
+    	return this.poidsTotal;
+    }
 }
