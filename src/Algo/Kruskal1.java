@@ -1,7 +1,6 @@
 package Algo;
 
-import Autre.ComparePoids;
-import Autre.FormeCycle;
+import Autre.ComparePoidsCroissant;
 import Type.Arc;
 import Type.Graphe;
 
@@ -15,18 +14,18 @@ public class Kruskal1 {
 
     public Kruskal1(Graphe graphe){
     	this.poidsTotal = 0;
-        this.listeArcs = new ArrayList<Arc>();
-        List<Arc> ListeArc = graphe.getArc();
-        Arc ArcAjout;
-        int i;
-        Collections.sort(ListeArc, new ComparePoids());
-        this.listeArcs.add(ListeArc.get(0));
-        this.poidsTotal += ListeArc.get(0).getValeur();
-        for(i = 1; i  < ListeArc.size(); i++) {
-        	ArcAjout = ListeArc.get(i);
-            if(!FormeCycle.FC(this.listeArcs, ArcAjout)) {
-            	this.listeArcs.add(ArcAjout);
-            	this.poidsTotal += ArcAjout.getValeur();
+        this.listeArcs = new ArrayList<>(graphe.getArc());
+        Arc arc;
+        int i = 0;
+        Collections.sort(listeArcs, new ComparePoidsCroissant());
+        while(i < listeArcs.size()) {
+            arc = listeArcs.get(i);
+            if(graphe.estConnexe(arc)) {
+            	listeArcs.remove(arc);
+                System.out.println(arc.getOrigine().getId()+ " " +arc.getArrivee().getId());
+                poidsTotal += arc.getValeur();
+            } else {
+                i++;
             }
         }
     }
