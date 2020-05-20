@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Graphe {
-    protected List<Sommet> sommets;
-    protected List<Arc> arcs;
+    private List<Sommet> sommets;
+    private List<Arc> arcs;
 
     public Graphe(){
         this.sommets = new ArrayList<Sommet>();
@@ -65,43 +65,29 @@ public class Graphe {
     public boolean estConnexe(Arc c) {
     	c.getOrigine().enleverVoisin(c.getArrivee());
     	c.getArrivee().enleverVoisin(c.getOrigine());
-    	List<Sommet> s = this.getSommetsClone();
-    	List<Sommet> res = parcour(new ArrayList<Sommet>(), c.getOrigine());
-    	boolean fini = false;
-    	while(!fini || !s.isEmpty()) {
-    		if(!res.contains(s.remove(0))) {
-    			fini = true;
+    	this.explorer(c.getOrigine());
+    	boolean connexe = true;
+    	for(int i = 0; i < this.getSommets().size(); i++) {
+    		if(!(this.getSommets().get(i).estMarque())) {
+    			connexe = false;
     		}
+    		this.getSommets().get(i).unmarquer();
     	}
-    	if(fini) {
+    	if(!connexe) {
     		c.getOrigine().ajouterVoisin(c.getArrivee());
     		c.getArrivee().ajouterVoisin(c.getOrigine());
     	}
-    	return !fini;
+    	return connexe;
     }
+  
     
-    public List<Sommet> parcour(List<Sommet> l, Sommet s){
+    public void explorer(Sommet s) {
+    	s.marquer();
     	List<Sommet> voisins = s.getVoisins();
-    	List<Sommet> res;
-    	int i = 0;
-    	l.add(s);
-    	while(i < voisins.size()) {
-    		if(l.contains(voisins.get(i))) {
-    			voisins.remove(i);
-    		}
-    		else {
-    			res = parcour(l, voisins.get(i));
-    			while(!res.isEmpty()) {
-    				if(l.contains(res.get(0))) {
-    					res.remove(0);
-    				}
-    				else {
-    					l.add(res.remove(0));
-    				}
-    			}
-    			i++;
+    	for(int i = 0; i < voisins.size(); i++) {
+    		if(!voisins.get(i).estMarque()) {
+    			explorer(voisins.get(i));
     		}
     	}
-    	return l;
     }
 }

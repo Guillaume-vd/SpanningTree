@@ -14,13 +14,15 @@ public class Kruskal1 {
     private int poidsTotal;
 
     public Kruskal1(Graphe graphe){
-        this.listeArcs = new ArrayList<>();
+    	this.poidsTotal = 0;
+        this.listeArcs = new ArrayList<Arc>();
         List<Arc> ListeArc = graphe.getArc();
         Arc ArcAjout;
         int i;
         Collections.sort(ListeArc, new ComparePoids());
         this.listeArcs.add(ListeArc.get(0));
-        for(i = 1; i  < ListeArc.size(); i++) { // ListeArc.size() / ListeArc.size() - 1 / ListeArc.size() -2???
+        this.poidsTotal += ListeArc.get(0).getValeur();
+        for(i = 1; i  < ListeArc.size(); i++) {
         	ArcAjout = ListeArc.get(i);
             if(!FormeCycle.FC(this.listeArcs, ArcAjout)) {
             	this.listeArcs.add(ArcAjout);
@@ -37,7 +39,7 @@ public class Kruskal1 {
     	return this.listeArcs;
     }
 
-    public int getPoidtotal(){
+    public int getPoidsTotal(){
     	return this.poidsTotal;
     }
 }

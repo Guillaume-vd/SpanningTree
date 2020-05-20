@@ -19,7 +19,7 @@ public class Prim {
     	List<Arc> listeArcs = new ArrayList<Arc>(graphe.getArc());
     	List<Sommet> r = new ArrayList<Sommet>(graphe.getSommets().subList(0, 1));
     	int taille = graphe.getSommets().size();
-    	List<Arc> t = new ArrayList<Arc>();
+    	this.listeArcs = new ArrayList<Arc>();
         Arc arc;
         int i;
         Collections.sort(listeArcs, new ComparePoidsDecroissant());
@@ -29,7 +29,7 @@ public class Prim {
         	while(!((r.contains(arc.getArrivee())) ^ (r.contains(arc.getOrigine())))) {
         		arc = listeArcs.get(i++);
         	}
-        	t.add(arc);
+        	this.listeArcs.add(arc);
         	listeArcs.remove(arc);
         	if(r.contains(arc.getArrivee())) {
         		r.add(arc.getOrigine());

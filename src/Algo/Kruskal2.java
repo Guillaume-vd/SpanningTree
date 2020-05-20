@@ -23,7 +23,6 @@ public class Kruskal2 {
         	arc = listeArcs.get(i);
             if(graphe.estConnexe(arc)) {
             	listeArcs.remove(arc);
-                
             }
             else {
             	this.poidsTotal += arc.getValeur();

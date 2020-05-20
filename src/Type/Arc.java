@@ -14,10 +14,6 @@ public class Arc {
         this.origine = origine;
         this.arrivee = arrivee;
         this.valeur = valeur;
-
-        origine.incrementerDegre();
-        arrivee.incrementerDegre();
-
         origine.ajouterVoisin(arrivee);
         arrivee.ajouterVoisin(origine);
     }
