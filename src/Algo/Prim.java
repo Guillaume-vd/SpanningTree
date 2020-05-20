@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import Autre.ComparePoids;
 import Autre.ComparePoidsDecroissant;
 import Type.Arc;
 import Type.Graphe;
@@ -22,7 +23,7 @@ public class Prim {
     	this.listeArcs = new ArrayList<Arc>();
         Arc arc;
         int i;
-        Collections.sort(listeArcs, new ComparePoidsDecroissant());
+        Collections.sort(listeArcs, new ComparePoids());
         while(r.size() < taille) {
         	i = 0;
         	arc = listeArcs.get(i++);
