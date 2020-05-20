@@ -15,16 +15,19 @@ public class Kruskal1 {
 
     public Kruskal1(Graphe graphe){
     	this.poidsTotal = 0;
+    	graphe.removeVoisins();
         this.listeArcs = new ArrayList<Arc>();
         List<Arc> ListeArc = graphe.getArc();
         Arc ArcAjout;
         int i;
         Collections.sort(ListeArc, new ComparePoids());
         this.listeArcs.add(ListeArc.get(0));
+        ListeArc.get(0).getArrivee().ajouterVoisin(ListeArc.get(0).getOrigine());
+        ListeArc.get(0).getOrigine().ajouterVoisin(ListeArc.get(0).getArrivee());
         this.poidsTotal += ListeArc.get(0).getValeur();
         for(i = 1; i  < ListeArc.size(); i++) {
         	ArcAjout = ListeArc.get(i);
-            if(!FormeCycle.FC(this.listeArcs, ArcAjout)) {
+            if(!graphe.contientCycle(ArcAjout)) {
             	this.listeArcs.add(ArcAjout);
             	this.poidsTotal += ArcAjout.getValeur();
             }

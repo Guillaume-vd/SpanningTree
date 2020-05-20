@@ -21,7 +21,7 @@ public class Kruskal2 {
         Collections.sort(listeArcs, new ComparePoidsDecroissant());
         while(i < listeArcs.size()) {
         	arc = listeArcs.get(i);
-            if(graphe.estConnexe(arc)) {
+            if(graphe.parcourProfondeur(arc)) {
             	listeArcs.remove(arc);
             }
             else {

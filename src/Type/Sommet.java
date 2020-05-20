@@ -45,6 +45,10 @@ public class Sommet {
     public void decrementerDegre() {
         this.degre--;
     }
+    
+    public void removeVoisins() {
+    	this.voisins.clear();
+    }
 
 
     public void ajouterVoisin(Sommet sommet) {

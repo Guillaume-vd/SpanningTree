@@ -29,13 +29,12 @@ public class main {
         fin = System.currentTimeMillis() - debut;
         System.out.println("Le graphe à été générer en " + fin+"ms");
 
-        /*
+
         //Algorithme de Kruskal1
         debut = System.currentTimeMillis();
         Kruskal1 k1 = new Kruskal1(graphe);
         fin = System.currentTimeMillis() - debut;
         System.out.println("L'arbre avec l'algo Krustal1 a été générer en " + fin+"ms, avec un total de " + k1.getNbArc() + " arcs et une taille et un poids total de " + k1.getPoidsTotal());
-        */
         
         //Algorithme de Kruskal2
         debut = System.currentTimeMillis();
