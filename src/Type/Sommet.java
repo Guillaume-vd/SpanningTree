@@ -13,7 +13,7 @@ public class Sommet {
         this.id = id;
         this.degre = 0;
         this.marque = false;
-        this.voisins = new ArrayList<Sommet>();
+        this.voisins = new ArrayList<>();
     }
 
     public boolean equals(Sommet autreSommet){
@@ -27,12 +27,10 @@ public class Sommet {
     public boolean estMarque() {
     	return this.marque;
     }
-    
-    
+
     public void marquer() {
     	this.marque = true;
     }
-    
     
     public void unmarquer() {
     	this.marque = false;
@@ -49,7 +47,6 @@ public class Sommet {
     public void removeVoisins() {
     	this.voisins.clear();
     }
-
 
     public void ajouterVoisin(Sommet sommet) {
         incrementerDegre();

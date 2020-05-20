@@ -15,7 +15,7 @@ public class Kruskal2 {
 
     public Kruskal2(Graphe graphe){
     	this.poidsTotal = 0;
-    	this.listeArcs = new ArrayList<Arc>(graphe.getArc());
+    	this.listeArcs = new ArrayList<>(graphe.getArc());
         Arc arc;
         int i = 0;
         Collections.sort(listeArcs, new ComparePoidsDecroissant());

@@ -1,7 +1,7 @@
 package Algo;
 
 import Autre.ComparePoids;
-import Autre.FormeCycle;
+import Autre.ComparePoidsCroissant;
 import Type.Arc;
 import Type.Graphe;
 
