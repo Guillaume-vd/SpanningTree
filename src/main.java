@@ -1,13 +1,11 @@
+import Algo.DMst;
 import Algo.Kruskal1;
 import Algo.Kruskal2;
 import Algo.Prim;
 import Autre.FabriquerGraph;
-import Autre.Reset;
 import Type.Graphe;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class main {
@@ -15,7 +13,6 @@ public class main {
     public static void main(String[] args) throws IOException {
     	long debut;
         long fin;
-        int nbCouleur;
 
         //Pour chosir son fichier parmi les fichiers contenus dans le graph
         Scanner sc = new Scanner(System.in);
@@ -50,6 +47,34 @@ public class main {
         Prim p = new Prim(graphe);
         fin = System.currentTimeMillis() - debut;
         System.out.println("L'arbre avec l'algo Prim a été générer en " + fin+"ms, avec un total de " + p.getNbArete() + " arcs et une taille et un poids total de " + p.getPoidsTotal());
+        
+        
+        //Algorithme de 2-mst
+        debut = System.currentTimeMillis();
+        DMst dMst = new DMst(graphe, 2);
+        fin = System.currentTimeMillis() - debut;
+        System.out.println("L'arbre avec l'algo 2-mst a été générer en " + fin+"ms, avec un total de " + dMst.getNbArete() + " arcs et une taille et un poids total de " + dMst.getPoidsTotal());
+        
+        
+        //Algorithme de 3-mst
+        debut = System.currentTimeMillis();
+        dMst = new DMst(graphe, 3);
+        fin = System.currentTimeMillis() - debut;
+        System.out.println("L'arbre avec l'algo 3-mst a été générer en " + fin+"ms, avec un total de " + dMst.getNbArete() + " arcs et une taille et un poids total de " + dMst.getPoidsTotal());
+        
+        
+        //Algorithme de 4-mst
+        debut = System.currentTimeMillis();
+        dMst = new DMst(graphe, 4);
+        fin = System.currentTimeMillis() - debut;
+        System.out.println("L'arbre avec l'algo 4-mst a été générer en " + fin+"ms, avec un total de " + dMst.getNbArete() + " arcs et une taille et un poids total de " + dMst.getPoidsTotal());
+    
+        
+        //Algorithme de 5-mst
+        debut = System.currentTimeMillis();
+        dMst = new DMst(graphe, 5);
+        fin = System.currentTimeMillis() - debut;
+        System.out.println("L'arbre avec l'algo 5-mst a été générer en " + fin+"ms, avec un total de " + dMst.getNbArete() + " arcs et une taille et un poids total de " + dMst.getPoidsTotal());
     }
 
 }
