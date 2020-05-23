@@ -41,7 +41,7 @@ public class Kruskal1 {
     
     
     public boolean cycle(Arc a) {
-    	Sommet s1 = a.getArrivee();
+    	Sommet s1 = a.getArrivee(); // on recupere les deux sommets des extrémites de l'arête
     	Sommet s2 = a.getOrigine();
     	Set<Sommet> set = null;
     	Set<Sommet> set1 = null;
@@ -49,51 +49,51 @@ public class Kruskal1 {
     	int i1 = 0;
     	int i = 0;
     	boolean find = false;
-    	while(!find && i < this.connexes.size()) {
-    		set = this.connexes.get(i);
-    		if(set.contains(s1) || set.contains(s2)) {
-    			if(set1 == null) {
-    				set1 = set;
-    				i1 = i;
+    	while(!find && i < this.connexes.size()) { // tant qu'on pas trouve les graphes dans lesquels sont les deux sommets (s1 et s2)
+    		set = this.connexes.get(i); // on donne assigne le ieme graphe à set
+    		if(set.contains(s1) || set.contains(s2)) { // si le graphe contient l'un des deux sommets
+    			if(set1 == null) { // si le set1 n'a pas encore de valeur
+    				set1 = set; // set1 prend la valeur de l'ensemble
+    				i1 = i; // et on enregistre l'indice de l'ensemble 
     			}
-    			else {
-    				set2 = set;
-    				find = true;
+    			else { // sinon on a deja set1
+    				set2 = set; // donc set2 prend la valeur de l'ensemble
+    				find = true; // et on a donc trouvé les deux graphes dans lesquels qont s1 et s2
     			}
     		}
     		i++;
     	}
-    	if(set1 == null) {
-    		set = new HashSet<Sommet>();
-    		set.add(s1);
+    	if(set1 == null) { // si les deux sommets sont dans aucun ensemble
+    		set = new HashSet<Sommet>(); // on cree un nouvel ensemble qui represente un graph connexes
+    		set.add(s1); // dans lequel on ajoute les deux sommets
     		set.add(s2);
-    		this.connexes.add(set);
+    		this.connexes.add(set); // on ajoute le graphe connexes dans la liste de graphes connexes
     	}
     	else if (set2 == null) {
-			if(this.connexes.get(i1).contains(s1) && this.connexes.get(i1).contains(s2)){
-				return true;
+			if(this.connexes.get(i1).contains(s1) && this.connexes.get(i1).contains(s2)){ // si les deux sommets sont deja dans le même graphe
+				return true; // on return true est le programme s'arrete la 
 			}
-			else if (this.connexes.get(i1).contains(s2)) {
-				this.connexes.get(i1).add(s1);
+			else if (this.connexes.get(i1).contains(s2)) { // si il y a uniquement le sommet d'origine de l'arc dans l'ensemble 1
+				this.connexes.get(i1).add(s1); // on ajoute le sommet d'arrivé de l'arc
 			}
 			else {
-				this.connexes.get(i1).add(s2);
+				this.connexes.get(i1).add(s2); // sinon on ajoute le sommet d'origine de l'arc
 			}
 		}
     	else {
-    		for (Sommet sommet : set2) {
-				if(set1.contains(sommet)) {
-					return true;
+    		for (Sommet sommet : set2) {// pour tout les sommets du deuxieme ensemble
+				if(set1.contains(sommet)) {  // si l'un des sommets du set2 est dans aussi l'ensemble 1 
+					return true; // on return true et le programme s'arrete la
 				}
-				else {
+				else { // sinon on ajout le sommet à l'ensemble 1
 					set1.add(sommet);
 				}
 			}
-    		this.connexes.remove(i1);
+    		this.connexes.remove(i1); // on enlève les deux anciens graphes connexes
     		this.connexes.remove(set2);
-    		this.connexes.add(set1);
+    		this.connexes.add(set1); // et on ajoute le nouveau graphe qui est la fusion des deux anciens graphes
     	}
-    	return false;
+    	return false; // si on arrive jusqu'ici c'est qu'il n'y a pas de cycle
     }
     
     public int getNbArete(){
