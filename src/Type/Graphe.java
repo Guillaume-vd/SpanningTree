@@ -90,46 +90,4 @@ public class Graphe {
     		}
     	}
     }
-    
-    
-    public void removeVoisins() {
-    	for(int i = 0; i < this.getSommets().size(); i++) {
-    		this.getSommets().get(i).removeVoisins();
-    	}
-    }
-    
-    
-    public boolean contientCycle(Arc c) {
-    	c.getOrigine().ajouterVoisin(c.getArrivee());
-    	c.getArrivee().ajouterVoisin(c.getOrigine());
-    	c.getOrigine().marquer();
-    	boolean cycle = parcourCycle(c.getOrigine(), c.getArrivee());
-    	if(cycle) {
-    		c.getOrigine().enleverVoisin(c.getArrivee());
-        	c.getArrivee().enleverVoisin(c.getOrigine());
-    	}
-    	for(int i = 0; i < this.getSommets().size(); i++) {
-    		this.getSommets().get(i).unmarquer();
-    	}
-    	return cycle;
-    }
-    
-    public boolean parcourCycle(Sommet arrive, Sommet s) {
-    	boolean cycle = false;
-    	s.marquer();
-    	int i = 0;
-    	List<Sommet> voisins = s.getVoisins();
-    	while(i < voisins.size() && !cycle) {
-    		if(voisins.get(i) != arrive) {
-    			if(voisins.get(i).estMarque()) {
-    				cycle = true;
-    			}
-    			else {
-    				cycle = parcourCycle(s, voisins.get(i));
-    			}
-    		}
-    		i++;
-    	}
-    	return cycle;
-    }
 }
